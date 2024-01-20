@@ -5,6 +5,7 @@ from bs4 import BeautifulSoup
 import matplotlib.pyplot as plt
 from collections import defaultdict
 import random
+import argparse
 
 '''
 Main idea about bounded order:
@@ -21,6 +22,20 @@ n^2 entry, each entry does 1 brackt and O(n) adjoin.  Overall O(n^3).
 POS = 1
 NEG = 0
 node_num = 0
+
+def parse_arguments():
+    parser = argparse.ArgumentParser(description="compositional function reasoner")
+
+    parser.add_argument("--input", type=str, default="input.txt", help="path of input file")
+
+    parser.add_argument("--get_matching", action='store_true', help="return matching")
+    
+    parser.add_argument("--empty_premises", action='store_true', help="allow empty_premises")
+    
+    args = parser.parse_args()
+    
+    return args
+    
 class UnfoldNode():
     def __init__(self, prim, num, sign) -> None:
         self.prim = prim
@@ -402,9 +417,9 @@ def parse_sequent(cat_list, empty_premises,get_matching):
     return f
     # return unfolding_formulae
 
-def parse_txt(folder="trn", empty_premises = False, get_matching=False):
+def parse_txt(inputfile="trn", empty_premises = False, get_matching=False):
     count = 0
-    with open('./LCbank.'+folder+'.str') as f:
+    with open(inputfile) as f:
         for line in f.readlines():
             # print(line,end="")
             l = line.split()
@@ -430,94 +445,6 @@ def parse_txt(folder="trn", empty_premises = False, get_matching=False):
             else:
                 print("Sequent " + str(count) + " is not derivable")
             count+=1
-
-def parse_xml(folder="trn", empty_premises = False, get_matching=False):
-    with open('./data/LCGbank.'+folder+'.xml') as f:
-        data = f.read()
-    _data = BeautifulSoup(data,"xml")
-    right_ = _data.find_all("sentential")
-    words = _data.find_all("words")
-    matching = _data.find_all("matching")
-    sentence = _data.find_all("sentence")
-
-    curpus_level_prob = 0
-    seen_sen = 0
-    total_yield = 0
-    last_idx = 1000000
-    num = 0
-    for ws,mt,r,s in zip(words[:last_idx],matching[:last_idx],right_[:last_idx],sentence[:last_idx]):
-        cur_cat = []
-        cur_match = {}
-        cur_cat_with_num = []
-        cur_match_str = ""
-        for w in ws.find_all("word"):
-            try:
-                c = "".join([l for l in w["cat"] if l.isalpha() or l in "/\\()"])
-                cur_cat.append(c)
-                cur_cat_with_num.append("".join([l for l in w["cat"]]))
-            except:
-                pass
-        for m in mt.find_all("match"):
-            cur_match_str +="("+str(min(int(m["negative"]),int(m["positive"])))+" "\
-                +str(max(int(m["negative"]),int(m["positive"])))+")"
-            cur_match[int(m["negative"])] = int(m["positive"])
-            cur_match[int(m["positive"])] = int(m["negative"])
-        # cur_cat.append("".join([l for l in r["cat"] if l.isalpha() or l in "/\\()"]))
-        rhs = r['cat']
-        inside_cat = False
-        # for key in cur_match:
-        #     for cat in cur_cat_with_num:
-        #         if "_"+str(key) in cat and "_"+str(cur_match[key]) in cat:
-        #             inside_cat=True
-        #             print(key,cur_match[key])
-        #             break
-        if rhs.count("/")+rhs.count("\\")==0 and not inside_cat:
-            # cur_str = " ".join(cur_cat_with_num)+" -> "+rhs
-            # cur_str = "".join([i for i in cur_str if not i.isdigit() and i!="_"])
-            # print(cur_str)
-            print(s['id'])
-            # # print(cur_match_str)
-            f = parse_sequent(cur_cat_with_num + [rhs], empty_premises, get_matching)
-            for key in cur_match:
-                if abs(f[key-1].depth - f[cur_match[key]-1].depth)!=1:
-                    print(f[key-1].depth - f[cur_match[key]-1].depth)
-                    print(s['id'],r['cat'])
-                    # exit()
-            # final_graphs =  f[-1][-1]
-            # answer = False
-            # same_match = False
-            # if final_graphs:
-            #     for g in final_graphs:
-            #         if sum([len(g.dashgraph[v]) for v in g.V])==0:
-            #             if not empty_premises and g.postiveLambda-g.CT==set():
-            #                 if get_matching:
-            #                     print(g.matching)
-            #                     for m_s in g.matching:
-            #                         if m_s == cur_match_str:
-            #                             same_match = True
-            #                 answer = True
-            #                 # break
-            #             elif empty_premises:
-            #                 if get_matching:
-            #                     print(g.matching)
-            #                     for m_s in g.matching:
-            #                         if m_s == cur_match_str:
-            #                             same_match = True
-            #                 answer=True
-            #                 break
-            # print("derivable:" + str(answer), " same match:"+ str(same_match)+ rhs)
-        # else:
-            # while rhs.count("/")+rhs.count("\\")!=0:
-            #     ch,i,B,A = get_main_connective(rhs)
-            #     # print(A,B)
-            #     if ch =="/":
-            #         cur_cat_with_num.append(B)
-            #     else:
-            #         cur_cat_with_num.insert(0,B)
-            #     rhs = A
-            # cur_str = " ".join(cur_cat_with_num)+" -> "+rhs
-            # cur_str = "".join([i for i in cur_str if not i.isdigit() and i!="_"])
-            # print(cur_str)
 
 def generate_random_sequent(num= 10000):
     count = 0
@@ -560,19 +487,7 @@ def generate_random_sequent(num= 10000):
 
 
 if __name__ == "__main__":
-    folder = "tst"
-    # folder = "random.1k.order8.breadth3"
-    #set False for L calculas
-    empty_premises = True
-    get_matching = False
-    parse_txt(folder, empty_premises, get_matching)
-    # generate_random_sequent(10000)
-    # g = Graph(set([1,3,5,7]))
-    # g.addEdge(1,3)
-    # g.addEdge(1,5)
-    # g.addEdge(3,5)
-    # g.addEdge(5,7)
-    # print(g.isCyclic())
-    # print(g.isAccess(3,7))
-    # print(g.isAccess(7,3))
-    # print(g)
+    args = parse_arguments()
+    empty_premises = args.empty_premises
+    parse_txt(args.input, empty_premises, args.get_matching)
+

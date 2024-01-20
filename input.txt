@@ -1,0 +1,10 @@
+S/S NP (S\NP)/NP ((S\NP)/NP)\((S\NP)/NP) NP/NP NP -> S
+S/S (S/S)/S NP/N N/N N/N N/N N (S\NP)/(S\NP) ((S\NP)/(S\NP))\((S\NP)/(S\NP)) (S\NP)/(S\NP) S\NP (S\NP)\(S\NP) ((S\NP)\(S\NP))/S NP/N N/N N/N N/N N S\NP ((S\NP)\(S\NP))/((S\NP)\(S\NP)) (S\NP)\(S\NP) (((S\NP)\(S\NP))\((S\NP)\(S\NP)))/NP NP (NP\NP)/NP NP (NP\NP)/NP NP/N N/N N NP (S\NP)/(S\NP) (S\NP)/(S\NP) (S\NP)/(S\NP) (S\NP)/NP NP/N N (NP\NP)/NP NP -> S
+NP/N N/N N NP\NP ((NP\NP)\(NP\NP))/NP NP/N N/N N/N N (S\NP)/NP NP/N N/N N ((S\NP)\(S\NP))/(S/S) NP (S\NP)/S ((S\NP)\(S\NP))/(S\NP) (S\NP)/(S\NP) (S\NP)/NP NP/N N/N N (NP\NP)/NP NP/N N (N\N)/N N -> S
+NP/N N/N N/N N/N N (NP\NP)/NP NP/N N/N N/N N (NP\NP)/NP NP/N N (N\N)/N N (NP\NP)/NP NP/NP NP (NP\NP)/(S\NP) (S\NP)/(S\NP) S\NP ((S\NP)\(S\NP))/NP NP/N N/N N ((S\NP)/(S\NP))/((S\NP)/(S\NP)) (S\NP)/(S\NP) (S\NP)/(S\NP) ((S\NP)/(S\NP))\((S\NP)/(S\NP)) (S\NP)/NP NP/N N/N N -> S
+NP/NP NP/NP NP (S\NP)/(S\NP) (S\NP)/(S\NP) S\NP ((S\NP)\(S\NP))/PP PP/NP NP/N N ((S\NP)\(S\NP))/(S\NP) (S\NP)/NP NP/N N/N N/N N ((S\NP)\(S\NP))/(S\NP) (S\NP)/NP NP/NP NP (NP\NP)/NP NP NP (S\S)\NP -> S
+NP/NP NP (NP\NP)/NP NP/NP NP/NP NP (NP/N)\NP N/N N/N N (NP\NP)/NP NP (S\NP)/(S\NP) (S\NP)/NP NP (S\NP)\(S\NP) -> S
+NP/NP NP/NP NP/NP NP (NP\NP)/NP NP (NP\NP)/NP NP (NP\NP)/NP NP (NP\NP)/NP NP/NP NP (NP\NP)/NP NP/NP NP (NP\NP)/NP NP/NP NP (NP\NP)/NP NP/NP NP/NP NP (S\NP)/(S\NP) S\NP ((S\NP)\(S\NP))/(S\NP) (S\NP)/(S\NP) S\NP -> S
+NP/N N (S\NP)/(S\NP) ((S\NP)/(S\NP))\((S\NP)/(S\NP)) S\NP -> S
+NP/N N/N N (S\NP)/(S\NP) S\NP -> S
+(S/S)/(S/S) S/S NP/N N (S\NP)/(S\NP) ((S\NP)/(S\NP))\((S\NP)/(S\NP)) (S\NP)/(S\NP) (S\NP)/(S\NP) (S\NP)/NP NP/N N (NP\NP)/NP NP/N N (NP\NP)/NP NP/N N/N N/N N/N N (S\S)/NP NP/NP NP (NP\NP)/NP NP/NP NP/NP NP (NP\NP)/NP NP/NP NP/NP NP -> S
