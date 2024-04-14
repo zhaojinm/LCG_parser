@@ -10,12 +10,15 @@ Example command:
 ```python3 sequent_derivation.py --input input.txt --empty_premises```
 
 # Citation
-
+This is a part of https://github.com/zhaojinm/Probabilistic_Lambek_Categorial_Sequent so cite that project if necessary.
 ```
-@article{zhao2024lcgparser,
-  title={Product-free LCG Parser via Term graph}, 
-  author={Jinman Zhao},
-  year={2024},
-  url={https://github.com/zhaojinm/LCG_parser}
+@article{zhaoplcg,
+  title={A Generative Model For Lambek Categorial Sequents}, 
+  author={Jinman Zhao and Gerald Penn},
+  booktitle = "Proceedings of the 2024 Joint International Conference on Computational
+  Linguistics, Language Resources and Evaluation",
+  month = may,
+  year = "2024",
+  address = "Turin, Italy",
 }
 ```
